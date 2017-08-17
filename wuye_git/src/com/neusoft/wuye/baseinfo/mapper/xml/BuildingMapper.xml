@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.wuye.baseinfo.mapper.IBuildingMapper">
+
+	<resultMap id="BuildingResultMap" type="Building" >
+		<id property="no" column="BUILDINGNO" />
+		<result property="code" column="BCODE"/>
+		<result property="address" column="BADDRESS"/>
+		<result property="direction" column="DIRECTION"/>
+		<result property="totalHome" column="TOTALHOME"/>
+		<result property="totalHouse" column="TOTALHOUSE"/>
+	</resultMap>
+	
+	<resultMap id="BuildingAssociationResultMap" type="Building" extends="BuildingResultMap">
+		<id property="no" column="BUILDINGNO" />
+		<result property="code" column="BCODE"/>
+		<result property="address" column="BADDRESS"/>
+		<result property="direction" column="DIRECTION"/>
+		<result property="totalHome" column="TOTALHOME"/>
+		<result property="totalHouse" column="TOTALHOUSE"/>	
+		<association property="area" resultMap="com.neusoft.wuye.baseinfo.mapper.IAreaMapper.AreaResultMap"></association>
+		<association property="buildingType" resultMap="com.neusoft.wuye.baseinfo.mapper.IBuildingTypeMapper.BuildingTypeResultMap"></association>
+	</resultMap>
+	
+	<insert id="insert" parameterType="Building">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SQ_BUILDING.nextval from dual
+		</selectKey>
+		INSERT INTO Building(BUILDINGNO,AREANO,BCODE,BADDRESS,BUILDINGTYPENO,DIRECTION,TOTALHOME,TOTALHOUSE)
+		VALUES(#{no},#{area.no},#{code},#{address},#{buildingType.no},#{direction},#{totalHome},#{totalHouse})
+	</insert>
+	
+	<update id="update" parameterType="Building">
+		update Building set BUILDINGNO=#{no},AREANO=#{area.no},BCODE=#{code},BADDRESS=#{address},BUILDINGTYPENO=#{buildingType.no},DIRECTION=#{direction},TOTALHOME=#{totalHome},TOTALHOUSE=#{totalHouse}
+		where BUILDINGNO=#{no}
+	</update>
+	
+	<delete id="delete" parameterType="Building">
+		delete from Building where BUILDINGNO=#{no}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="BuildingAssociationResultMap">
+		select * from Building where BUILDINGNO=#{no}
+	</select>
+	
+	
+	<select id="selectListByAll" resultMap="BuildingResultMap">
+		select * from Building
+	</select>
+	
+	<select id="selectListByCondition" resultMap="BuildingResultMap">
+		select * from Building
+	</select>
+	
+	<select id="selectCountByAll" resultType="int">
+		select count(BUILDINGNO) from BuildingType
+	</select>
+	
+	<select id="selectListByAllWithPage" resultMap="BuildingAssociationResultMap">
+		select a.*,b.*,c.* from Building a inner join Area b on a.areaNo=b.areano
+		inner join BuildingType c on a.BuildingTypeNo=c.TYPENO
+		
+	</select>
+		
+	<select id="selectListByConditionWithPage" resultMap="BuildingAssociationResultMap">
+		select * from Building
+	</select>
+	
+	<select id="selectListByAreaNo" parameterType="_int" resultMap="BuildingResultMap">
+		select * from BUILDING where areano=#{areaNo}
+	</select>
+	
+	<select id="selectListByBuildingTypeNo" parameterType="_int" resultMap="BuildingResultMap">
+		select * from BUILDING where BUILDINGTYPENO=#{buildingTypeNO}
+	</select>
+	
+</mapper>
+
