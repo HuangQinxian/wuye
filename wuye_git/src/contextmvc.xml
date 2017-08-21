@@ -39,5 +39,15 @@
 	<!-- 启用AspectJ 注释机制 -->
 	<aop:aspectj-autoproxy/>
 	
+	<!-- 配置json解析器 -->
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+	
+	<bean class="org.springframework.web.portlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter"/>
+			</list>
+		</property>
+	</bean>
 	
 </beans>
