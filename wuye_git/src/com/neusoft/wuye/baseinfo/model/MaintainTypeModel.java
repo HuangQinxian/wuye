@@ -1,8 +1,11 @@
 package com.neusoft.wuye.baseinfo.model;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("MaintainType")
 public class MaintainTypeModel {
 	private int no;
-	private String name;   //ÀàĞÍÃû³Æ
+	private String name;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getNo() {
 		return no;
 	}

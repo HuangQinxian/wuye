@@ -34,7 +34,7 @@ public class BuildingService implements IBuildingService {
 	@Override
 	public List<BuildingModel> getListByAllWithPage(int rows, int page) throws Exception {
 		// TODO Auto-generated method stub
-		RowBounds rb = new RowBounds(rows*(page-1),page);
+		RowBounds rb = new RowBounds(rows*(page-1),rows);
 		return mapper.selectListByAllWithPage(rb);
 	}
 

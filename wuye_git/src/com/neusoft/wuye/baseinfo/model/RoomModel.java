@@ -1,75 +1,26 @@
 package com.neusoft.wuye.baseinfo.model;
 
-/**
- * @author oliver
- *
- */
+import org.apache.ibatis.type.Alias;
+
+//æˆ¿é—´Modelç±»
+@Alias("Room")
 public class RoomModel {
-	private int no;
-	
-	private String departmentCode; //µ¥Ôª
-	private String floor;     //Â¥²ã
-	private String roomCode;  //·¿¼äºÅ
-	private double buildingArea; //Ê¹ÓÃÃæ»ı
-	private double feeArea;    //½É·ÑÃæ»ı
-	private String roomStatus; //·¿¼ä×´Ì¬£¨¿ÕÏĞ/Èë×¡
-	private String roomType;  //·¿¼äÀàĞÍ£¨room ×¡Õ¬  house ¹«½¨£©
-	
-	private HouseTypeModel houseType;  //·¿Îİ»§ĞÍ±àºÅ
-	private BuildingModel building;    //Â¥Óî±àºÅ
+	private int no=0;
+	private BuildingModel building=null; //æ¥¼å®‡
+	private HouseTypeModel houseType=null; //æˆ¿å‹
+	private String department=null;
+	private String floor=null;
+	private String code=null;
+	private double buildingArea=0; //å»ºç­‘é¢ç§¯
+	private double useArea=0; //ä½¿ç”¨é¢ç§¯
+	private double feeArea=0; //æ”¶è´¹é¢ç§¯
+	private String status=null; //æ”¶è´¹çŠ¶æ€
+	private String roomType=null; //æˆ¿é—´ç±»å‹ ä½å®…æˆ–å…±å»º
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
-	}
-	public String getDepartmentCode() {
-		return departmentCode;
-	}
-	public void setDepartmentCode(String departmentCode) {
-		this.departmentCode = departmentCode;
-	}
-	public String getFloor() {
-		return floor;
-	}
-	public void setFloor(String floor) {
-		this.floor = floor;
-	}
-	public String getRoomCode() {
-		return roomCode;
-	}
-	public void setRoomCode(String roomCode) {
-		this.roomCode = roomCode;
-	}
-	public double getBuildingArea() {
-		return buildingArea;
-	}
-	public void setBuildingArea(double buildingArea) {
-		this.buildingArea = buildingArea;
-	}
-	public double getFeeArea() {
-		return feeArea;
-	}
-	public void setFeeArea(double feeArea) {
-		this.feeArea = feeArea;
-	}
-	public String getRoomStatus() {
-		return roomStatus;
-	}
-	public void setRoomStatus(String roomStatus) {
-		this.roomStatus = roomStatus;
-	}
-	public String getRoomType() {
-		return roomType;
-	}
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
-	}
-	public HouseTypeModel getHouseType() {
-		return houseType;
-	}
-	public void setHouseType(HouseTypeModel houseType) {
-		this.houseType = houseType;
 	}
 	public BuildingModel getBuilding() {
 		return building;
@@ -77,7 +28,61 @@ public class RoomModel {
 	public void setBuilding(BuildingModel building) {
 		this.building = building;
 	}
+	public HouseTypeModel getHouseType() {
+		return houseType;
+	}
+	public void setHouseType(HouseTypeModel houseType) {
+		this.houseType = houseType;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getFloor() {
+		return floor;
+	}
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public double getBuildingArea() {
+		return buildingArea;
+	}
+	public void setBuildingArea(double buildingArea) {
+		this.buildingArea = buildingArea;
+	}
+	public double getUseArea() {
+		return useArea;
+	}
+	public void setUseArea(double useArea) {
+		this.useArea = useArea;
+	}
+	public double getFeeArea() {
+		return feeArea;
+	}
+	public void setFeeArea(double feeArea) {
+		this.feeArea = feeArea;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getRoomType() {
+		return roomType;
+	}
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
 	
 	
-	
+
 }

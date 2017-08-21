@@ -49,7 +49,7 @@ public class AreaService implements IAreaService {
 
 	@Override
 	public List<AreaModel> getListByAllWithPage(int rows, int page) throws Exception {
-		RowBounds rb = new RowBounds(rows*(page-1),page);
+		RowBounds rb = new RowBounds(rows*(page-1),rows);
 		return mapper.selectListByAllWithPage(rb);
 	}
 

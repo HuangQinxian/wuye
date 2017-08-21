@@ -1,8 +1,13 @@
 package com.neusoft.wuye.baseinfo.model;
 
+import org.apache.ibatis.type.Alias;
+
+//å®¢æˆ·ç±»å‹Modelç±»
+@Alias("CustomerType")
 public class CustomerTypeModel {
-	private int no;
-	private String name;   //¿Í»§ÀàĞÍÃû³Æ£¨¸öÈË£¬µ¥Î»£©
+
+	private int no=0;
+	private String name=null;
 	public int getNo() {
 		return no;
 	}
@@ -15,6 +20,4 @@ public class CustomerTypeModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 }

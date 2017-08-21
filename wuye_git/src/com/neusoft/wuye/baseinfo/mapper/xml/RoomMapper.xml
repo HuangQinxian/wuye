@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.wuye.baseinfo.mapper.IRoomMapper">
+	<!-- 房间的简单属性映射 -->
+	<resultMap id="RoomResultMap" type="Room" >
+		<id property="no" column="ROOMNO" />
+		<result property="department" column="DepartmentCode"/>
+		<result property="floor" column="Floor"/>
+		<result property="code" column="RoomCode"/>
+				<result property="buildingArea" column="BuildingArea"/>
+		<result property="feeArea" column="FeeArea"/>
+		<result property="status" column="RoomStatus"/>
+		<result property="roomType" column="RoomType"/>
+
+	</resultMap>
+	<!-- 房间的关联属性映射 -->
+	<resultMap id="RoomWithAssociationResultMap" type="Room" extends="RoomResultMap" >
+		<association property="building" column="BuildingNo" select="com.neusoft.wuye.baseinfo.mapper.IBuildingMapper.select"></association>
+		<association property="houseType" column="HouseTypeNo" select="com.neusoft.wuye.baseinfo.mapper.IHouseTypeMapper.select"></association>
+		 
+	</resultMap>
+	
+	<insert id="insert" parameterType="Room">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SQ_ROOM.nextval from dual
+		</selectKey>
+		INSERT INTO ROOM(ROOMNO,HOUSETYPENO,BUILDINGNO,DEPARTMENTCODE,FLOOR,ROOMCODE,BUILDINGAREA,FEEAREA,ROOMSTATUS,ROOMTYPE) 
+		VALUES(#{no},#{houseType.no},#{building.no},#{department},#{floor},#{code},#{buildingArea},#{feeArea},#{status},#{roomType})
+	</insert>
+	
+	<update id="update" parameterType="Room">
+		update ROOM set ROOMNO=#{no},HOUSETYPENO=#{houseType.no},BUILDINGNO=#{building.no},DEPARTMENTCODE=#{department},FLOOR=#{floor},ROOMCODE=#{code},BUILDINGAREA=#{buildingArea},FEEAREA=#{feeArea},ROOMSTATUS=#{status},ROOMTYPE=#{roomType}
+		where AREANO=#{no}
+	</update>
+	
+	<delete id="delete" parameterType="Room">
+		delete from Room where RoomNO=#{no}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="RoomWithAssociationResultMap">
+		select * from Room where RoomNo=#{roomNo}
+	</select>
+	
+	
+	<select id="selectListByAll" resultMap="RoomResultMap">
+		select * from Room
+	</select>
+	
+	<select id="selectListByAllWithPage" resultMap="RoomResultMap">
+		select * from Room
+	</select>
+	
+	
+	<select id="selectCountByAll" resultType="int">
+		select count(ROOMNO) from ROOM
+	</select>
+	<!-- 根据检索条件取得Room列表，无分页 -->
+	<select id="selectListByCondition" resultMap="RoomResultMap">
+	
+	</select>
+	<!-- 根据检索条件取得Room列表，有分页 -->
+	<select id="selectListByConditionWithPage">
+	
+	</select>
+	<!-- 根据检索条件取得Room个数 -->
+	<select id="selectCountByCondition">
+	
+	</select>
+	
+	
+	
+
+
+</mapper>
+

@@ -2,10 +2,11 @@ package com.neusoft.wuye.baseinfo.model;
 
 import org.apache.ibatis.type.Alias;
 
+//居住类型Model类
 @Alias("LivingType")
 public class LivingTypeModel {
-	private int no;
-	private String name;
+	private int no=0;
+	private String name=null;
 	public int getNo() {
 		return no;
 	}
@@ -18,6 +19,5 @@ public class LivingTypeModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	
 }

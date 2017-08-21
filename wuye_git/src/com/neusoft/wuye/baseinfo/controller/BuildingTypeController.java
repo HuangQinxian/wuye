@@ -7,13 +7,16 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.neusoft.wuye.baseinfo.common.ResultMessage;
 import com.neusoft.wuye.baseinfo.model.BuildingTypeModel;
 import com.neusoft.wuye.baseinfo.service.IBuildingTypeService;
 
-@Controller
+@RestController      //作用：相当于@Controller + @ResponseBody
 @RequestMapping(value="/buildingtype")
 public class BuildingTypeController {
 
@@ -24,23 +27,37 @@ public class BuildingTypeController {
 		this.buildingTypeService = buildingTypeService;
 	}
 
+	//添加楼宇类型
 	@RequestMapping(value="/add")
-	public String add(BuildingTypeModel btm) throws Exception {
-		System.out.println("进来了");
+	public ResultMessage add(BuildingTypeModel btm) throws Exception {
 		buildingTypeService.add(btm);
-		return "/buildingtype/main.html";
+		return new ResultMessage("200","添加成功");
 	}
 	
+	//根据类型编号获取楼宇
 	@RequestMapping(value="/get")
-	@ResponseBody
 	public BuildingTypeModel get(@RequestParam(required=true) int typeNo) throws Exception {
 		return buildingTypeService.get(typeNo);
 	}
 	
+	//分页查询
 	@RequestMapping("/getListByAllWithPage")
-	@ResponseBody
 	public List<BuildingTypeModel> getListByAllWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{
 		return buildingTypeService.getListByAllWithPage(rows, page);
+	}
+	
+	//删除
+	@RequestMapping("/delete")
+	public ResultMessage delete(BuildingTypeModel btm) throws Exception{
+		buildingTypeService.delete(btm);
+		return new ResultMessage("200", "删除成功");
+	}
+	
+	//修改
+	@RequestMapping(value="/modify",method=RequestMethod.POST)
+	public ResultMessage modify(BuildingTypeModel btm) throws Exception{
+		buildingTypeService.modify(btm);
+		return new ResultMessage("200","修改成功");
 	}
 	
 }

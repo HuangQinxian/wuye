@@ -2,10 +2,12 @@ package com.neusoft.wuye.baseinfo.model;
 
 import org.apache.ibatis.type.Alias;
 
+//房屋户型Model类
 @Alias("HouseType")
 public class HouseTypeModel {
-	private int no;
-	private String name;
+
+	private int no=0;
+	private String name=null;
 	public int getNo() {
 		return no;
 	}
