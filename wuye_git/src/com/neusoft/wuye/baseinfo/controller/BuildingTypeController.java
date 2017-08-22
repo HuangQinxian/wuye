@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neusoft.wuye.baseinfo.common.PageInfo;
 import com.neusoft.wuye.baseinfo.common.ResultMessage;
 import com.neusoft.wuye.baseinfo.model.BuildingTypeModel;
 import com.neusoft.wuye.baseinfo.service.IBuildingTypeService;
@@ -41,9 +42,25 @@ public class BuildingTypeController {
 	}
 	
 	//分页查询
-	@RequestMapping("/getListByAllWithPage")
-	public List<BuildingTypeModel> getListByAllWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{
+	@RequestMapping("/getListWithPage")
+	public List<BuildingTypeModel> getListWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{
 		return buildingTypeService.getListByAllWithPage(rows, page);
+	}
+	
+	//分页查询
+	@RequestMapping("/getListByAllWithPage")
+	public PageInfo<BuildingTypeModel> getListByAllWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{
+		PageInfo<BuildingTypeModel> pageInfo = new PageInfo<>();
+		pageInfo.setPage(page);
+		pageInfo.setRows(rows);
+		int totalPage = 0;
+		int totalCount = buildingTypeService.getCountByAll();
+		totalPage = totalCount%rows == 0?totalCount/rows:totalCount/rows+1;
+		pageInfo.setTotalPage(totalPage);
+		pageInfo.setTotalCount(totalCount);
+		List<BuildingTypeModel> list = buildingTypeService.getListByAllWithPage(rows, page);
+		pageInfo.setList(list);
+		return pageInfo;
 	}
 	
 	//删除
