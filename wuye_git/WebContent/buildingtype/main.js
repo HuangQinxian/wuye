@@ -65,12 +65,12 @@ $(document).ready(function(){
 						$("#nameMessage").html("");
 						$.post("buildingtype/add.mvc",{name:typeName},function(data){
 							if(data.code == "200"){
-								alert(data.msg);
+								 BootstrapDialog.alert({title:"提示",message:data.msg});
 								getPageInfo(rows,1);
 								$("#buildingTypeModal").modal("hide");
 							}else{
 								$("#nameMessage").html("");
-								alert("添加失败");
+								 BootstrapDialog.alert({title:"提示",message:"添加失败"});
 							}
 						});						
 					}
@@ -85,7 +85,7 @@ $(document).ready(function(){
 			$("#buildingTypeModal").modal("show");
 		}else if(ope == "修改"){
 			if(buildingTypeNo==0){
-				alert("请选择要修改的建筑类型");
+				 BootstrapDialog.alert({title:"提示",message:"请选择要修改的建筑类型"});
 				return;
 			}else{
 				$("#ModalLabel").html("修改建筑类型");
@@ -103,12 +103,12 @@ $(document).ready(function(){
 							$("#nameMessage").html("");
 							$.post("buildingtype/modify.mvc",{no:buildingTypeNo,name:typeName},function(data){
 								if(data.code == "200"){
-									alert(data.msg);
+									BootstrapDialog.alert({title:"提示",message:data.msg});
 									getPageInfo(rows,page);
 									$("#buildingTypeModal").modal("hide");
 								}else{
 									$("#nameMessage").html("");
-									alert("修改失败");
+									 BootstrapDialog.alert({title:"提示",message:"修改失败"});
 								}
 							});						
 						}
@@ -125,10 +125,30 @@ $(document).ready(function(){
 				$("#buildingTypeModal").modal("show");
 			}
 		}else if(ope == "删除"){
-			
+			if(buildingTypeNo==0){
+				 BootstrapDialog.alert({title:"提示",message:'请选择要删除的建筑类型'});
+				return;
+			}
+			$.get("buildingtype/checkCanDelete.mvc",{typeNo:buildingTypeNo},function(canDeleteResult){
+				if(canDeleteResult.msg == "N"){
+					//不能删
+					 BootstrapDialog.alert({title:"提示",message:"不能删除"});
+				}else{				
+					 BootstrapDialog.confirm({title:"提示",message:"确认删除吗",type:"type-danger"},function(deleteChoice){
+						 if(deleteChoice){
+							$.get("buildingtype/delete.mvc",{no:buildingTypeNo},function(deleteResult){
+								if(deleteResult.code == "200"){
+									 BootstrapDialog.alert({title:"提示",message:"删除成功"});
+									 getPageInfo(rows,page);
+								}
+							});
+						}
+					 });
+				}
+			});
 		}else if(ope == "查看"){
 			if(buildingTypeNo==0){
-				alert("请选择要查看的建筑类型");
+				 BootstrapDialog.alert("请选择要查看的建筑类型");
 				return;
 			}else{
 				$("#ModalLabel").html("查看建筑类型");

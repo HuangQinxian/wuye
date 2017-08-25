@@ -20,4 +20,6 @@ public interface IAreaService {
 	public int getCountByAll() throws Exception;
 
 	public int getPageCountByAll(int rows) throws Exception;
+	
+	public boolean checkNameExist(String name) throws Exception;
 }

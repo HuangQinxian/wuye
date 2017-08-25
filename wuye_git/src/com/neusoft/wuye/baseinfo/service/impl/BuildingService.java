@@ -44,4 +44,10 @@ public class BuildingService implements IBuildingService {
 		return mapper.selectListByAreaNo(areaNo);
 	}
 
+	@Override
+	public int selectCount(int areaNo, int buildingTypeNo, String code) throws Exception {
+		
+		return mapper.selectCount(areaNo, buildingTypeNo, code);
+	}
+
 }

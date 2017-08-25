@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neusoft.wuye.baseinfo.common.PageInfo;
 import com.neusoft.wuye.baseinfo.common.ResultMessage;
 import com.neusoft.wuye.baseinfo.model.BuildingTypeModel;
+import com.neusoft.wuye.baseinfo.service.IBuildingService;
 import com.neusoft.wuye.baseinfo.service.IBuildingTypeService;
 
 @RestController      //作用：相当于@Controller + @ResponseBody
@@ -22,6 +23,9 @@ import com.neusoft.wuye.baseinfo.service.IBuildingTypeService;
 public class BuildingTypeController {
 
 	private IBuildingTypeService buildingTypeService;
+	
+	@Resource
+	private IBuildingService buildingService;
 	
 	@Autowired
 	public void setBuildingTypeService(IBuildingTypeService buildingTypeService) {
@@ -66,6 +70,7 @@ public class BuildingTypeController {
 	//删除
 	@RequestMapping("/delete")
 	public ResultMessage delete(BuildingTypeModel btm) throws Exception{
+		System.out.println("进来了");
 		buildingTypeService.delete(btm);
 		return new ResultMessage("200", "删除成功");
 	}
@@ -75,6 +80,16 @@ public class BuildingTypeController {
 	public ResultMessage modify(BuildingTypeModel btm) throws Exception{
 		buildingTypeService.modify(btm);
 		return new ResultMessage("200","修改成功");
+	}
+	
+	//检查是否能够删除
+	@RequestMapping("/checkCanDelete")
+	public ResultMessage checkCanDelete(int typeNo) throws Exception {
+		int count = buildingService.selectCount(0, typeNo, null);
+		if(count > 0) {
+			return new ResultMessage("200","N");
+		}
+		return new ResultMessage("200","Y");
 	}
 	
 }

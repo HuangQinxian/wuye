@@ -54,6 +54,21 @@
 		select * from Building
 	</select>
 	
+	<select id="selectCount" resultType="int">
+		select count(*) from Building
+		<where>
+			<if test="areaNo != 0">
+				and areaNo=#{areaNo}
+			</if>
+			<if test="buildingTypeNo != 0">
+				and buildingTypeNo=#{buildingTypeNo}
+			</if>
+			<if test="code != null">
+				and bcode=#{code}
+			</if>
+		</where>
+	</select>
+	
 	<select id="selectCountByAll" resultType="int">
 		select count(BUILDINGNO) from BuildingType
 	</select>

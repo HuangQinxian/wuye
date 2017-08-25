@@ -72,4 +72,15 @@ public class AreaService implements IAreaService {
 		return page;
 	}
 
+	@Override
+	public boolean checkNameExist(String name) throws Exception {
+		List<AreaModel> list = getListByAll();
+		for(AreaModel am : list) {
+			if(am.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.neusoft.wuye.baseinfo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.neusoft.wuye.baseinfo.model.BuildingModel;
@@ -37,7 +38,7 @@ public interface IBuildingMapper {
 
 	//
 	// 按检索条件取得建筑楼宇的个数
-	public int selectCount(int areaNo, int buildingTypeNo, String code) throws Exception;
+	public int selectCount(@Param("areaNo")int areaNo,@Param("buildingTypeNo") int buildingTypeNo,@Param("code") String code) throws Exception;
 
 	public List<BuildingModel> selectListByAreaNo(int areaNo) throws Exception;
 	

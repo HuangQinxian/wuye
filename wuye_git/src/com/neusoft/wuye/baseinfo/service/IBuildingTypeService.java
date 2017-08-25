@@ -20,4 +20,5 @@ public interface IBuildingTypeService {
 	public int getCountByAll() throws Exception;
 
 	public int getPageCountByAll(int rows) throws Exception;
+	
 }

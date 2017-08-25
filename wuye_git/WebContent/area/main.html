@@ -1,0 +1,43 @@
+<script src="area/main.js"></script>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-6">建筑类型</div>
+					<div id="operation" class="col-md-6 text-right">
+						<a href="#" class="btn btn-default">增加</a> 
+						<a href="#" class="btn btn-default">修改</a> 
+						<a href="#" class="btn btn-default">删除</a>
+						<a href="#" class="btn btn-default">查看</a>
+					</div>
+				</div>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table id="areaGrid"></table>
+				<div id="areaGridPage"></div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-6 -->
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="ModalLabel"></h4> <!-- 标题 -->
+            </div>
+            <div class="modal-body" id="modelbody">
+            	<!-- 要加载的内容 -->
+            
+            </div>
+           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
