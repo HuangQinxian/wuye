@@ -15,4 +15,5 @@ public interface IAreaMapper {
 	public List<AreaModel> selectListByAll() throws Exception;
 	public List<AreaModel> selectListByAllWithPage(RowBounds rb) throws Exception;
 	public int selectCountByAll() throws Exception;
+	public AreaModel selectAreaWithPhoto(int areaNo) throws Exception;
 }

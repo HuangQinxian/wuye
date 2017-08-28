@@ -87,4 +87,10 @@ public class AreaService implements IAreaService {
 		return false;
 	}
 
+	@Override
+	public AreaModel selectAreaWithPhoto(int areaNo) throws Exception {
+		
+		return mapper.selectAreaWithPhoto(areaNo);
+	}
+
 }

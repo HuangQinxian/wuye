@@ -26,6 +26,12 @@
 		 <!-- <collection property="buildings" column="areano" select="com.neusoft.wuye.baseinfo.mapper.IBuildingMapper.selectListByAreaNo"></collection> -->
 	</resultMap>
 	
+	<resultMap type="Area" id="areaWithPhotoResultMap" extends="AreaResultMap">	
+		<result property="photo" column="PHOTO"/> 
+	    <result property="photoFileName" column="PHOTOFILENAME"/>
+	    <result property="photoContentType" column="PHOTOCONTENTTYPE"/>
+	</resultMap>
+	
 	<insert id="insert" parameterType="Area">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
 			select SQ_AREA.nextval from dual
@@ -60,8 +66,18 @@
 		select * from Area
 	</select>
 	
+	<!-- 不带附件信息的小区 -->
 	<select id="selectListByAllWithPage" resultMap="AreaResultMap">
 		select * from Area
+	</select>
+	
+	<!-- 带附件信息的小区 -->
+	<select id="selectListWithPage" resultMap="areaWithPhotoResultMap">
+		select * from Area
+	</select>
+	
+	<select id="selectAreaWithPhoto" parameterType="_int" resultMap="areaWithPhotoResultMap">
+		select * from Area where AREANO = #{areaNo}
 	</select>
 	
 	<select id="selectCountByAll" resultType="int">

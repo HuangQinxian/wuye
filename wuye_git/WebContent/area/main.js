@@ -144,22 +144,38 @@ $(document).ready(function(){
 				}
 			});
 		}else if(ope == "查看"){
-			if(buildingTypeNo==0){
-				 BootstrapDialog.alert("请选择要查看的建筑类型");
+			if(areaNo==0){
+				 BootstrapDialog.alert("请选择要查看的小区");
 				return;
 			}else{
-				$("#ModalLabel").html("查看建筑类型");
+				$("#ModalLabel").html("小区详情");
 				$("#modelbody").load("area/detail.html",function(){
-					$.getJSON("buildingtype/get.mvc",{typeNo:buildingTypeNo},function(data){
-						$("#buildingTypeName").html(data.name);
+					$.getJSON("area/selectAreaWithPhoto.mvc",{areaNo:areaNo},function(data){
+					    $("#name").html(data.name);
+			            $("#aaddress").html(data.aaddress);
+			            $("#developer").html(data.developer);
+			            $("#totalBuildingArea").html(data.totalBuildingArea);
+			            $("#totalUserArea").html(data.totalUserArea);
+			            $("#totalPackArea").html(data.totalPackArea);
+			            $("#totalHome").html(data.totalHome);
+			            $("#totalPack").html(data.totalPack);
+			            $("#totalHouse").html(data.totalHouse);
+			            $("#startDate").html(data.startDate);
+			            if(data.photo != null){
+			            	//如果是图片，直接显示，如果是其他文件，提供下载功能
+			            	if(data.photoContentType.indexOf("image") >= 0){
+			            		$("#fujian").html("<img src='upload/"+data.photoFileName+"' width='80px' height='80px' />");
+			            	}else{
+			            		$("#fujian").html("<a href='area/downPhoto.mvc?areaNo="+areaNo+"'>下载</a>")
+			            	}
+			            }
 					});
 					
-					$("#buildingTypeCancel").on("click",function(){
-						$("#buildingTypeModal").modal("hide");
-						getPageInfo(rows,page);
+					$("#areaCancel").on("click",function(){
+						$("#areaModal").modal("hide");
 					});					
 				});
-				$("#buildingTypeModal").modal("show");
+				$("#areaModal").modal("show");
 			}
 		}else{}
 		return;

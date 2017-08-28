@@ -22,4 +22,6 @@ public interface IAreaService {
 	public int getPageCountByAll(int rows) throws Exception;
 	
 	public boolean checkNameExist(String name) throws Exception;
+	
+	public AreaModel selectAreaWithPhoto(int areaNo) throws Exception;
 }

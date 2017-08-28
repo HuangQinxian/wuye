@@ -1,10 +1,15 @@
 package com.neusoft.wuye.baseinfo.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,10 +37,9 @@ public class AreaController {
 				am.setPhoto(uploadPhoto.getBytes());
 				am.setPhotoContentType(uploadPhoto.getContentType());
 				am.setPhotoFileName(uploadPhoto.getOriginalFilename());
-			}
-			
-			//测试日期显示
-			System.out.println(am.getStartDate());
+				String realPath = session.getServletContext().getRealPath("/upload/"+am.getPhotoFileName());
+				uploadPhoto.transferTo(new File(realPath));
+			}	
 			areaService.add(am);
 			return new ResultMessage("200","添加成功");
 		}
@@ -87,6 +91,31 @@ public class AreaController {
 			}
 			return result;
 			
+		}
+		
+		//根据小区号获取带附件的小区
+		@RequestMapping("/selectAreaWithPhoto")
+		public AreaModel selectAreaWithPhoto(@RequestParam int areaNo) throws Exception{
+			return areaService.selectAreaWithPhoto(areaNo);
+		}
+		
+		//附件下载
+		@RequestMapping("/downPhoto")
+		public ResponseEntity<byte[]> downPhoto(@RequestParam int areaNo) throws Exception{
+			AreaModel am = selectAreaWithPhoto(areaNo);
+			String contentType = am.getPhotoContentType();
+			String fileName = am.getPhotoFileName();
+			if(contentType != null && fileName != null) {
+				String[] str = contentType.split("/");
+				if(str.length == 2) {
+					HttpHeaders headers = new HttpHeaders();
+					fileName = new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
+					headers.setContentDispositionFormData("attachment", fileName);
+					headers.setContentType(new MediaType(str[0], str[1]));
+					return new ResponseEntity<byte[]>(am.getPhoto(),headers, HttpStatus.CREATED);
+				}
+			}
+			return null;			
 		}
 		
 	
