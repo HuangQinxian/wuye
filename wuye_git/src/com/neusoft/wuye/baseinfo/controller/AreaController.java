@@ -3,11 +3,13 @@ package com.neusoft.wuye.baseinfo.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.neusoft.wuye.baseinfo.common.PageInfo;
 import com.neusoft.wuye.baseinfo.common.ResultMessage;
@@ -23,7 +25,17 @@ public class AreaController {
 	
 	//添加小区
 		@RequestMapping(value="/add")
-		public ResultMessage add(AreaModel am) throws Exception {
+		public ResultMessage add(AreaModel am,@RequestParam(required=false)MultipartFile uploadPhoto,HttpSession session) throws Exception {
+			if(uploadPhoto != null) {
+//				System.out.println(uploadFile.getOriginalFilename());
+//				System.out.println(uploadFile.getContentType());
+				am.setPhoto(uploadPhoto.getBytes());
+				am.setPhotoContentType(uploadPhoto.getContentType());
+				am.setPhotoFileName(uploadPhoto.getOriginalFilename());
+			}
+			
+			//测试日期显示
+			System.out.println(am.getStartDate());
 			areaService.add(am);
 			return new ResultMessage("200","添加成功");
 		}

@@ -8,6 +8,7 @@ import com.neusoft.wuye.baseinfo.model.AreaModel;
 
 public interface IAreaMapper {
 	public void insert(AreaModel am) throws Exception;
+	public void insertWithPhoto(AreaModel am) throws Exception;
 	public void update(AreaModel am) throws Exception;
 	public void delete(AreaModel am) throws Exception;
 	public AreaModel select(int areaNo) throws Exception;

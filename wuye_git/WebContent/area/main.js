@@ -10,7 +10,8 @@ $(document).ready(function(){
 		colModel: [
 			{ label: '名称', name: 'name', width: 150 },
 			{ label: '地址', name: 'aaddress', width: 200 },
-			{ label: '开发商', name: 'developer', width: 100 }
+			{ label: '开发商', name: 'developer', width: 100 },
+			{ label: '入住日期', name: 'startDate', width: 100}
 		],
 		viewrecords: true, // show the current page, data rang and total records on the toolbar
 		autowidth:true,
@@ -26,7 +27,7 @@ $(document).ready(function(){
 		},
 		pager: "#areaGridPage",
 		onSelectRow:function(id){
-			alert(id);
+			areaNo = parseInt(id);
 		}
 	});
 	

@@ -1,4 +1,4 @@
-<form id="areaAddForm" action="area/add.mvc" role="form" method="post">
+<form id="areaAddForm" action="area/add.mvc" role="form" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>小区名称</label>
             <input class="form-control" name="name" id="name">
@@ -27,6 +27,12 @@
             <label>公建总数</label>
             <input class="form-control" name="totalHouse" id="totalHouse">
             <p class="help-block" id="totalHouseMessage"></p>
+            <label>入住日期</label>
+            <input type="date" class="form-control" name="startDate" id="startDate" date-date-format="YYYY-MMMM-DD">
+            <p class="help-block" id="totalHouseMessage"></p>
+            <label>附件</label>
+            <input type="file" class="form-control" name="uploadPhoto" id="uploadPhoto">
+            <p class="help-block" id="uploadPhotoMessage"></p>
         </div>
         
         <button type="submit" id="areaSubmit" class="btn btn-default">提交</button>

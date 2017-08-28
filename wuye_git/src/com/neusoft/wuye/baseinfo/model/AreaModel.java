@@ -1,8 +1,12 @@
 package com.neusoft.wuye.baseinfo.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Alias("Area")
 public class AreaModel {
@@ -16,6 +20,36 @@ public class AreaModel {
 	private int totalHome;
 	private int totalHouse;
 	private int totalPack;
+	
+	//入住日期
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+	private Date startDate;
+	
+	
+	// 文件上传
+	private byte[] photo;
+	private String photoFileName;
+	private String photoContentType;
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+	public String getPhotoContentType() {
+		return photoContentType;
+	}
+	public void setPhotoContentType(String photoContentType) {
+		this.photoContentType = photoContentType;
+	}
 	
 	private List<BuildingModel> buildings;
 	
@@ -69,6 +103,12 @@ public class AreaModel {
 	}
 	public int getTotalHome() {
 		return totalHome;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 	public void setTotalHome(int totalHome) {
 		this.totalHome = totalHome;

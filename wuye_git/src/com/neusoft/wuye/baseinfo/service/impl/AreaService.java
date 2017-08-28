@@ -21,7 +21,11 @@ public class AreaService implements IAreaService {
 	
 	@Override
 	public void add(AreaModel am) throws Exception {
-		mapper.insert(am);
+		if(am.getPhotoFileName() != null) {
+			mapper.insertWithPhoto(am);
+		}else {
+			mapper.insert(am);			
+		}
 	}
 
 	@Override

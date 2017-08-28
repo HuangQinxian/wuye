@@ -15,6 +15,7 @@
 		<result property="totalHome" column="TOTALHOME"/>
 		<result property="totalHouse" column="TOTALHOUSE"/>
 		<result property="totalPack" column="TOTALPACK"/>
+		<result property="startDate" column="startDate"/>
 	</resultMap>
 	
 	<resultMap type="Area" id="AreaResultWithCollectionMap" extends="AreaResultMap">
@@ -29,8 +30,16 @@
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
 			select SQ_AREA.nextval from dual
 		</selectKey>
-		INSERT INTO Area(AREANO,AREANAME,AADDRESS,DEVELOPER,TOTALBUIDINGAREA,TOTALUSEAREA,TOTALPACKAREA,TOTALHOME,TOTALHOUSE,TOTALPACK) 
-		VALUES(#{no},#{name},#{aaddress},#{developer},#{totalBuildingArea},#{totalUserArea},#{totalPackArea},#{totalHome},#{totalHouse},#{totalPack})
+		INSERT INTO Area(AREANO,AREANAME,AADDRESS,DEVELOPER,TOTALBUIDINGAREA,TOTALUSEAREA,TOTALPACKAREA,TOTALHOME,TOTALHOUSE,TOTALPACK,startDate) 
+		VALUES(#{no},#{name},#{aaddress},#{developer},#{totalBuildingArea},#{totalUserArea},#{totalPackArea},#{totalHome},#{totalHouse},#{totalPack},#{startDate})
+	</insert>
+	
+	<insert id="insertWithPhoto" parameterType="Area">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SQ_AREA.nextval from dual
+		</selectKey>
+		INSERT INTO Area(AREANO,AREANAME,AADDRESS,DEVELOPER,TOTALBUIDINGAREA,TOTALUSEAREA,TOTALPACKAREA,TOTALHOME,TOTALHOUSE,TOTALPACK,photo,photoFileName,photoContentType,startDate) 
+		VALUES(#{no},#{name},#{aaddress},#{developer},#{totalBuildingArea},#{totalUserArea},#{totalPackArea},#{totalHome},#{totalHouse},#{totalPack},#{photo},#{photoFileName},#{photoContentType},#{startDate})
 	</insert>
 	
 	<update id="update" parameterType="Area">
