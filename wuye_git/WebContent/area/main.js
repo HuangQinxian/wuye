@@ -177,6 +177,34 @@ $(document).ready(function(){
 				});
 				$("#areaModal").modal("show");
 			}
+		}else if(ope == "导入数据"){
+			$("#ModalLabel").html("导入数据");
+			$("#modelbody").load("area/import.html",function(){
+				
+				//利用jquery form 插件
+				$("#importForm").ajaxForm(function(data) { 
+					if(data.code == "200"){
+						 BootstrapDialog.alert({title:"提示",message:data.msg});
+						 $("#areaModal").modal("hide");
+					}else{
+						 BootstrapDialog.alert({title:"提示",message:"导入失败"});
+					}
+	            });	
+				
+				$("#areaCancel").on("click",function(){
+					$("#areaModal").modal("hide");
+				});	
+			});
+			$("#areaModal").modal("show");
+		}else if(ope == "导出数据"){
+			$("#ModalLabel").html("导出数据");
+			$("#modelbody").load("area/export.html",function(){
+			
+				$("#areaCancel").on("click",function(){
+					$("#areaModal").modal("hide");
+				});	
+			});
+			$("#areaModal").modal("show");
 		}else{}
 		return;
 	})

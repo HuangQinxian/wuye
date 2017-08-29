@@ -1,6 +1,7 @@
 package com.neusoft.wuye.baseinfo.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import com.neusoft.wuye.baseinfo.common.PageInfo;
 import com.neusoft.wuye.baseinfo.common.ResultMessage;
 import com.neusoft.wuye.baseinfo.model.AreaModel;
 import com.neusoft.wuye.baseinfo.service.IAreaService;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 
 @RestController
 @RequestMapping("/area")
@@ -112,11 +114,50 @@ public class AreaController {
 					fileName = new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
 					headers.setContentDispositionFormData("attachment", fileName);
 					headers.setContentType(new MediaType(str[0], str[1]));
+					//设置响应状态码create （201）
 					return new ResponseEntity<byte[]>(am.getPhoto(),headers, HttpStatus.CREATED);
 				}
 			}
 			return null;			
 		}
 		
-	
+		//excel数据导入
+		@RequestMapping("importFromExcel")
+		public ResultMessage importFromExcel(@RequestParam MultipartFile uploadExcel) throws Exception{
+			if(uploadExcel != null)
+				return areaService.importFromExcel(uploadExcel);
+			return new ResultMessage("","");	
+			
+			
+		}
+		
+		//excel数据导出
+		@RequestMapping("exportToExcel")
+		public ResponseEntity<byte[]> exportToExcel(HttpSession session) throws Exception{
+			String sourcePath = session.getServletContext().getRealPath("/areaexport/areaexport.xlsx");
+			String targetPath = session.getServletContext().getRealPath("/areaexport/areaexport"+(int)(Math.random()*1000)+".xlsx");
+			
+			File source = new File(sourcePath);
+			File target = new File(targetPath);
+			
+			areaService.exportToExcel(source, target);
+			
+			File tempFile = new File(targetPath);
+			FileInputStream in = new FileInputStream(tempFile);
+			byte[] data = new byte[in.available()];
+			in.read(data, 0, data.length);
+			
+			//临时文件的内容已经读取到内存中，此时可以删除临时文件
+			in.close();
+			tempFile.delete();
+			
+			HttpHeaders headers = new HttpHeaders();
+			String fileName = new String("小区资料.xlsx".getBytes("UTF-8"),"ISO-8859-1");
+			headers.setContentDispositionFormData("attachment", fileName);
+			headers.setContentType(new MediaType("application","vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+			//设置响应状态码create （201）
+			return new ResponseEntity<byte[]>(data,headers, HttpStatus.CREATED);
+			
+		}
+		
 }
