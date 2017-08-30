@@ -52,6 +52,12 @@ public class AreaController {
 			return areaService.get(no);
 		}
 		
+		//获取所有小区
+		@RequestMapping("/getAll")
+		public List<AreaModel> getAll() throws Exception{
+			return areaService.getListByAll();
+		}
+		
 		//分页查询
 		@RequestMapping("/getListWithPage")
 		public List<AreaModel> getListWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{

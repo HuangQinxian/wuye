@@ -14,14 +14,9 @@
 	</resultMap>
 	
 	<resultMap id="BuildingAssociationResultMap" type="Building" extends="BuildingResultMap">
-		<id property="no" column="BUILDINGNO" />
-		<result property="code" column="BCODE"/>
-		<result property="address" column="BADDRESS"/>
-		<result property="direction" column="DIRECTION"/>
-		<result property="totalHome" column="TOTALHOME"/>
-		<result property="totalHouse" column="TOTALHOUSE"/>	
-		<association property="area" resultMap="com.neusoft.wuye.baseinfo.mapper.IAreaMapper.AreaResultMap"></association>
-		<association property="buildingType" resultMap="com.neusoft.wuye.baseinfo.mapper.IBuildingTypeMapper.BuildingTypeResultMap"></association>
+		
+		<association property="area" column="AREANO" select="com.neusoft.wuye.baseinfo.mapper.IAreaMapper.select"></association>
+		<association property="buildingType" column="BUILDINGTYPENO" select="com.neusoft.wuye.baseinfo.mapper.IBuildingTypeMapper.select"></association>
 	</resultMap>
 	
 	<insert id="insert" parameterType="Building">
@@ -78,9 +73,20 @@
 		inner join BuildingType c on a.BuildingTypeNo=c.TYPENO
 		
 	</select>
-		
+	
 	<select id="selectListByConditionWithPage" resultMap="BuildingAssociationResultMap">
-		select * from Building
+		select * from building
+		<where>
+			<if test="areaNo != 0">
+				and areaNo = #{areaNo}
+			</if>
+			<if test="buildingTypeNo != 0">
+				and BUILDINGTYPENO = #{buildingTypeNo}
+			</if>
+			<if test="code != null and code != ''">
+				and BCODE = #{code}
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectListByAreaNo" parameterType="_int" resultMap="BuildingResultMap">

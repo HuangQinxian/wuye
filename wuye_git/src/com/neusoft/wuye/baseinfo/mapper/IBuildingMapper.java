@@ -30,7 +30,7 @@ public interface IBuildingMapper {
 	public List<BuildingModel> selectListByAllWithPage(RowBounds rb) throws Exception;
 
 	// 按检索条件取得楼宇列表,分页方式
-	public List<BuildingModel> selectListByConditionWithPage(int areaNo, int buildingTypeNo, String code, RowBounds rb)
+	public List<BuildingModel> selectListByConditionWithPage(@Param("areaNo")int areaNo, @Param("buildingTypeNo")int buildingTypeNo, @Param("code")String code, RowBounds rb)
 			throws Exception;
 
 	// 取得建筑楼宇的个数

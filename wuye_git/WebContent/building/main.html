@@ -1,0 +1,65 @@
+<script src="building/main.js"></script>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-6">建筑</div>
+					<div id="operation" class="col-md-6 text-right">
+						<a href="#" class="btn btn-default">增加</a> 
+						<a href="#" class="btn btn-default">修改</a> 
+						<a href="#" class="btn btn-default">删除</a>
+						<a href="#" class="btn btn-default">查看</a>
+						<a href="#" class="btn btn-default">导入数据</a>
+						<a href="#" class="btn btn-default">导出数据</a>
+					</div>
+				</div>
+			</div>
+			
+			<div id="searchCondition" style="margin-left:80px;margin-top:20px;">
+				<span>小区</span>
+				<span>
+					<select id="areaSelect" style="display:inline-block;width:150px;height:30px;border:1px solid #337ab7;">
+						
+					</select>
+				</span>
+				<span>小区</span>
+				<span>
+					<select id="buildingTypeSelect" style="display:inline-block;width:150px;height:30px;border:1px solid #337ab7;">
+						
+					</select>
+				</span>
+				<span>小区</span>
+				<span>
+					<input type="text" id="codeSelect" style="display:inline-block;width:150px;height:30px;border:1px solid #337ab7;padding-left:10px;"/>
+				</span>
+			</div>
+			
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table id="buildingGrid"></table>
+				<div id="buildingGridPage"></div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-6 -->
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" id="buildingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="ModalLabel"></h4> <!-- 标题 -->
+            </div>
+            <div class="modal-body" id="modelbody">
+            	<!-- 要加载的内容 -->
+            
+            </div>
+           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<settings>
 		<setting name="cacheEnabled" value="true"/>
-		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="lazyLoadingEnabled" value="false"/>
 		<setting name="logImpl" value="LOG4J"/>
 	</settings>
 </configuration>

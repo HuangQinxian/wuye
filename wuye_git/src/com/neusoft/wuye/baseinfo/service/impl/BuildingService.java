@@ -37,6 +37,13 @@ public class BuildingService implements IBuildingService {
 		RowBounds rb = new RowBounds(rows*(page-1),rows);
 		return mapper.selectListByAllWithPage(rb);
 	}
+	
+	@Override
+	public List<BuildingModel> getListByAllWithPageWithConditions(int areaNo, int buildingTypeNo, String code,int rows, int page) throws Exception {
+		// TODO Auto-generated method stub
+		RowBounds rb = new RowBounds(rows*(page-1),rows);
+		return mapper.selectListByConditionWithPage(areaNo, buildingTypeNo, code, rb);
+	}
 
 	@Override
 	public List<BuildingModel> selectListByAreaNo(int areaNo) throws Exception {
@@ -48,6 +55,12 @@ public class BuildingService implements IBuildingService {
 	public int selectCount(int areaNo, int buildingTypeNo, String code) throws Exception {
 		
 		return mapper.selectCount(areaNo, buildingTypeNo, code);
+	}
+
+	@Override
+	public int getPageCountByAll(int areaNo, int buildingTypeNo, String code,int rows) throws Exception {
+		int count = this.selectCount(areaNo, buildingTypeNo, code);
+		return count%rows == 0?count/rows:count/rows+1;
 	}
 
 }

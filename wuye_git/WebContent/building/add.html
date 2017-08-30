@@ -1,0 +1,40 @@
+<form id="areaAddForm" action="area/add.mvc" role="form" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>小区名称</label>
+            <input class="form-control" name="name" id="name">
+            <p class="help-block" id="nameMessage"></p>
+            <label>小区地址</label>
+            <input class="form-control" name="aaddress" id="aaddress">
+            <p class="help-block" id="aaddressMessage"></p>
+            <label>开发商</label>
+            <input class="form-control" name="developer" id="developer">
+            <p class="help-block" id="developerMessage"></p>
+            <label>总建筑面积</label>
+            <input class="form-control" name="totalBuildingArea" id="totalBuildingArea">
+            <p class="help-block" id="totalBuildingAreaMessage"></p>
+            <label>使用总面积</label>
+            <input class="form-control" name="totalUserArea" id="totalUserArea">
+            <p class="help-block" id="totalUserAreaMessage"></p>
+            <label>车位总面积</label>
+            <input class="form-control" name="totalPackArea" id="totalPackArea">
+            <p class="help-block" id="totalPackAreaMessage"></p>
+            <label>房子总数</label>
+            <input class="form-control" name="totalHome" id="totalHome">
+            <p class="help-block" id="totalHomeMessage"></p>
+            <label>车位总数</label>
+            <input class="form-control" name="totalPack" id="totalPack">
+            <p class="help-block" id="totalPackMessage"></p>
+            <label>公建总数</label>
+            <input class="form-control" name="totalHouse" id="totalHouse">
+            <p class="help-block" id="totalHouseMessage"></p>
+            <label>入住日期</label>
+            <input type="date" class="form-control" name="startDate" id="startDate" date-date-format="YYYY-MMMM-DD">
+            <p class="help-block" id="totalHouseMessage"></p>
+            <label>附件</label>
+            <input type="file" class="form-control" name="uploadPhoto" id="uploadPhoto">
+            <p class="help-block" id="uploadPhotoMessage"></p>
+        </div>
+        
+        <button type="submit" id="areaSubmit" class="btn btn-default">提交</button>
+        <button type="button" id="areaCancel" class="btn btn-default">取消</button>
+</form>

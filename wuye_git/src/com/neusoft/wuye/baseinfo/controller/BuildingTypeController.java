@@ -45,6 +45,12 @@ public class BuildingTypeController {
 		return buildingTypeService.get(typeNo);
 	}
 	
+	//获取所有的建筑类型
+	@RequestMapping("/getAll")
+	public List<BuildingTypeModel> getAll() throws Exception{
+		return buildingTypeService.getListByAll();
+	}
+	
 	//分页查询
 	@RequestMapping("/getListWithPage")
 	public List<BuildingTypeModel> getListWithPage(@RequestParam(defaultValue="5")int rows,@RequestParam(defaultValue="1") int page) throws Exception{

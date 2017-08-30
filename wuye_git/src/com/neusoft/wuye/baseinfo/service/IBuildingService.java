@@ -17,4 +17,10 @@ public interface IBuildingService {
 
 	// 按检索条件取得建筑楼宇的个数
 	public int selectCount(int areaNo,int buildingTypeNo,String code) throws Exception;
+
+	public int getPageCountByAll(int areaNo, int buildingTypeNo, String code,int rows) throws Exception;
+
+	List<BuildingModel> getListByAllWithPageWithConditions(int areaNo, int buildingTypeNo, String code, int rows,
+			int page) throws Exception;
+
 }
