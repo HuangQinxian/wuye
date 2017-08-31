@@ -69,10 +69,13 @@ $(function(){
 			});
 			//拦截用户增加
 			$("form#userAddForm").ajaxForm(function(data){
-				if(data.result=="Y"){
+				if(data.result=="200"){
 					$("#userGrid").trigger("reloadGrid");
+					BootstrapDialog.alert({title:"提示",message:data.msg});
+				}else{
+					BootstrapDialog.alert({title:"提示",message:"用户信息添加失败"});
 				}
-				BootstrapDialog.alert({title:"提示",message:data.message});
+				
 				$('#UserInfoModal').modal("hide");
 			});
 			//点击取消按钮处理
@@ -112,9 +115,6 @@ $(function(){
 								$("input[name='functionNos'][value='"+userdata.functions[i].no+"']").attr("checked","true");
 							}
 						}
-						
-						
-						
 						
 					});
 					

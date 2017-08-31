@@ -46,8 +46,9 @@ public class BuildingCondtroller {
 		PageInfo<BuildingModel> pageInfo = new PageInfo<BuildingModel>();
 		pageInfo.setRows(rows);
 		pageInfo.setPage(page);
-		pageInfo.setTotalCount(buildingService.selectCount(areaNo, buildingTypeNo, code));
-		pageInfo.setTotalPage(buildingService.getPageCountByAll(areaNo, buildingTypeNo, code,rows));
+		int count = buildingService.selectCount(areaNo, buildingTypeNo, code);
+		pageInfo.setTotalCount(count);
+		pageInfo.setTotalPage(count % rows == 0?count/rows:count/rows+1);
 		List<BuildingModel> list = buildingService.getListByAllWithPageWithConditions(areaNo, buildingTypeNo, code, rows, page);
 		pageInfo.setList(list);
 		return pageInfo;

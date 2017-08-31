@@ -11,10 +11,14 @@
 		<result property="level" column="LEVELNO"/>
 	</resultMap>
 	
-	<resultMap id="FunctionCollectionResultMap" type="Function" >
+	<resultMap id="FunctionCollectionResultMap" type="Function" extends="FunctionResultMap">
 		<collection property="users" column="FUNNO" select="com.neusoft.wuye.admin.mapper.IUserMapper.selectListByFunction"></collection>
 	</resultMap>
 		
+	<resultMap id="FunctionCollectionWithModuleResultMap" type="Function" extends="FunctionResultMap">
+		<association property="module" column="MNO" select="com.neusoft.wuye.admin.mapper.IModuleMapper.select"></association>
+	</resultMap>
+	
 	<select id="select" parameterType="int" resultMap="FunctionResultMap">
 		select * from SystemFunction where FUNNO=#{functionNo}
 	</select>
@@ -24,7 +28,7 @@
 		select * from SystemFunction
 	</select>
 	<!--  -->	
-	<select id="selectListByUser" parameterType="string" resultMap="FunctionResultMap">
+	<select id="selectListByUser" parameterType="string" resultMap="FunctionCollectionWithModuleResultMap">
 		select a.* from SystemFunction a inner join SystemFunctionUser b
 		on a.FUNNO=b.FUNNO where b.USERID=#{userid} 
 	</select>

@@ -17,9 +17,15 @@ public class FunctionModel {
 	private int level=0;
 	//拥有此功能的用户列表
 	private List<UserModel> users=null;
+	//功能模块
+	private ModuleModel module=null;
 	
-	
-	
+	public ModuleModel getModule() {
+		return module;
+	}
+	public void setModule(ModuleModel module) {
+		this.module = module;
+	}
 	public int getNo() {
 		return no;
 	}

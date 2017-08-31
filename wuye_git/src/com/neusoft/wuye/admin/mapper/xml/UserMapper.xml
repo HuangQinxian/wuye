@@ -17,8 +17,8 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="User">
-		INSERT INTO UserInfo(UUSERID,UPASSWORD,UNAME,SEX) 
-		VALUES(#{userid},#{password},#{name},#{sex})
+		INSERT INTO UserInfo(UUSERID,UPASSWORD,UNAME,SEX,USERSTATUS) 
+		VALUES(#{userid},#{password},#{name},#{sex},#{status})
 	</insert>
 	
 	<insert id="grantFunction">

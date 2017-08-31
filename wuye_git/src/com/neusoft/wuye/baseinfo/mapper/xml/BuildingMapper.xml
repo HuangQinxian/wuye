@@ -58,7 +58,7 @@
 			<if test="buildingTypeNo != 0">
 				and buildingTypeNo=#{buildingTypeNo}
 			</if>
-			<if test="code != null">
+			<if test="code != null and code != ''">
 				and bcode=#{code}
 			</if>
 		</where>

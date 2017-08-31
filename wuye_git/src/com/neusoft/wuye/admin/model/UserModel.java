@@ -11,7 +11,7 @@ public class UserModel {
 	private String password=null;
 	private String name=null;
 	private String sex=null;
-	private String status=null; //操作是否允许登录状态
+	private String status="N"; //操作是否允许登录状态
 	private String loginStatus=null;
 	//用户拥有的功能集合
 	private List<FunctionModel> functions=null;

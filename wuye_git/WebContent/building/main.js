@@ -46,7 +46,7 @@ $(document).ready(function(){
 		],
 		viewrecords: true, // show the current page, data rang and total records on the toolbar
 		autowidth:true,
-		height: 400,
+		height: 200,
 		rowNum: 4,
 		rowList:[4,8,12],
 		jsonReader:{
