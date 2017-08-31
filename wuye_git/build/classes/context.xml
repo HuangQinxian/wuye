@@ -63,7 +63,7 @@
 	<!-- 配置Spring管理SqlSessionFactory对象 -->
 	<bean id="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="typeAliasesPackage" value="com.neusoft.wuye.baseinfo.model"></property>
+		<property name="typeAliasesPackage" value="com.neusoft.wuye.baseinfo.model,com.neusoft.wuye.admin.model"></property>
 		<property name="mapperLocations" value="classpath:com/neusoft/wuye/*/mapper/xml/*.xml"></property>
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 				
@@ -85,7 +85,7 @@
 	</bean>
 	-->
 	<!-- 获得Mapper接口对象, 配置扫描Mapper接口父包的方式  ,新版Spring-MyBatis模式-->
-	<mybatis:scan base-package="com.neusoft.wuye.baseinfo.mapper" />
+	<mybatis:scan base-package="com.neusoft.wuye.*.mapper" />
 	
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

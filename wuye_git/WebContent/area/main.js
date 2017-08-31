@@ -6,7 +6,7 @@ $(document).ready(function(){
 		url: 'area/getListByAllWithPage.mvc',
 		datatype: "json",
 		mtype:"GET",
-		styleUI : 'Bootstrap',
+		styleUI:'Bootstrap',
 		colModel: [
 			{ label: '名称', name: 'name', width: 150 },
 			{ label: '地址', name: 'aaddress', width: 200 },
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		viewrecords: true, // show the current page, data rang and total records on the toolbar
 		autowidth:true,
 		height: 400,
-		rowNum: 2,
+		rowNum: 4,
 		rowList:[2,4,6,8],
 		jsonReader:{
 			root:"list",
