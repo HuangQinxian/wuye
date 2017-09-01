@@ -33,6 +33,11 @@ $(function(){
 		multiselect:false,
 		onSelectRow:function(id){
 			userid=id;
+		},
+		loadComplete:function(errordata){
+			if(errordata.msg){
+				BootstrapDialog.alert({title:"提示",message:errordata.msg});
+			}
 		}
 	});
 	//点击增加处理
@@ -57,7 +62,15 @@ $(function(){
 					password:{
 						required:true
 					},
-					name:{required:true}
+					name:{required:true},
+					youzhengcode:{
+						required:true,
+						youzhengcode:true
+					},
+					mobile:{
+						required:true,
+						mobile:true
+					}
 					
 				},
 				messages:{
@@ -69,7 +82,7 @@ $(function(){
 			});
 			//拦截用户增加
 			$("form#userAddForm").ajaxForm(function(data){
-				if(data.result=="200"){
+				if(data.code=="200"){
 					$("#userGrid").trigger("reloadGrid");
 					BootstrapDialog.alert({title:"提示",message:data.msg});
 				}else{
@@ -133,10 +146,10 @@ $(function(){
 				});
 				//拦截用户修改表单提交
 				$("form#userModifyForm").ajaxForm(function(data){
-					if(data.result=="Y"){
+					if(data.code=="Y"){
 						$("#userGrid").trigger("reloadGrid");
 					}
-					BootstrapDialog.alert({title:"提示",message:data.message});
+					BootstrapDialog.alert({title:"提示",message:data.msg});
 					$('#UserInfoModal').modal("hide");
 				});
 				$("button[type='reset']").on("click",function(){

@@ -112,6 +112,10 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<UserModel> getListByAllWithPage(int rows, int page) throws Exception {
 		RowBounds rb=new RowBounds(rows*(page-1),rows);
+		
+		//认为制造一个异常
+		//int a = 1/0;
+		
 		return ump.selectListByAllWithPage(rb);
 	}
 	@Override
