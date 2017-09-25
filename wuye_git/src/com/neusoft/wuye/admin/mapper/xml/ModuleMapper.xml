@@ -8,6 +8,10 @@
 		<id property="no" column="MNO" />
 		<result property="name" column="MNAME"/>
 	</resultMap>
+	
+	<insert id="add" parameterType="Module">
+		insert into SystemModule (MNO,MNAME) values (#{no},#{name})
+	</insert>
 		
 	<select id="select" parameterType="int" resultMap="ModuleResultMap">
 		select * from SystemModule where MNO=#{moduleNo}
@@ -18,9 +22,13 @@
 		select * from SystemModule
 	</select>
 
+	<select id="getCountByAll" resultType="_int">
+		select count(*) from SystemModule 
+	</select>
 	
-	
-	
+	<select id="getListByAllWithPage" resultMap="ModuleResultMap">
+		select * from SystemModule
+	</select>
 
 
 </mapper>

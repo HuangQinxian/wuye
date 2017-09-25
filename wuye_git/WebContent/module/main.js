@@ -5,17 +5,14 @@ $(function(){
 	var userid=null;
 	
 	//显示系统操作员表格
-	$("#userGrid").jqGrid({
-		url: 'user/list/page.mvc',
+	$("#moduleGrid").jqGrid({
+		url: 'module/list/page.mvc',
 		datatype: "json",
 		mtype:"GET",
 		styleUI:'Bootstrap',
 		colModel: [
-			{ label: '账号', name: 'userid', width: 150 },
-			{ label: '姓名', name: 'name', width: 200 },
-			{ label: '性别', name: 'sex', width: 100 },
-			{ label: '登录状态', name: 'loginStatus', width: 100 }
-	
+			{ label: '模块编号', name: 'no', width: 150 },
+			{ label: '模块名称', name: 'name', width: 200 },	
 		],
 		viewrecords: true, // show the current page, data rang and total records on the toolbar
 		autowidth:true,
@@ -29,7 +26,7 @@ $(function(){
 			records:"count",
 			id:"userid"
 		},
-		pager: "#userGridPager",
+		pager: "#moduleGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
 			userid=id;
@@ -41,17 +38,10 @@ $(function(){
 		}
 	});
 	//点击增加处理
-	$("a#userAddLink").on("click",function(){
-		$("#modelbody").load("userinfo/add.html",function(){
-			$("#ModalLabel").html("增加系统操作员");
-			//取得系统功能列表
-			$.getJSON("function/list/all.mvc",function(funtionList){
-				if(funtionList!=null){
-					for(var i=0;i<funtionList.length;i++){
-						$("div#userfunctions").append("<label class='checkbox-inline'><input type='checkbox' name='functionNos' value='"+funtionList[i].no+"'>"+funtionList[i].name+"</label>");
-					}
-				}
-			});
+	$("a#moduleAddLink").on("click",function(){
+		$("#modelbody").load("module/add.html",function(){
+			$("#ModalLabel").html("增加系统模块");
+			
 			//验证
 			$("form#userAddForm").validate({
 				rules:{

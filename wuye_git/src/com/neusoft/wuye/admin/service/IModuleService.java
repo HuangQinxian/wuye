@@ -11,5 +11,9 @@ public interface IModuleService {
 	public ModuleModel get(int moduleNo) throws Exception;
 	//取得所有的模块列表
 	public List<ModuleModel> getListByAll() throws Exception;
+	public int getCountByAll();
+	public int getPageCountByAll(int rows);
+	public List<ModuleModel> getListByAllWithPage(int rows, int page);
+	public void add(ModuleModel um);
 	
 }

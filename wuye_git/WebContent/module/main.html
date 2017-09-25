@@ -1,22 +1,21 @@
-<script type="text/javascript" src="userinfo/main.js"></script>
+<script type="text/javascript" src="module/main.js"></script>
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="row">
-				      <div class="col-md-6">系统操作员维护</div>
+				      <div class="col-md-6">系统模块</div>
 				      <div class="col-md-6 text-right"  >
-				        <a href="#" id="userAddLink" class="btn btn-default">增加</a>
-				        <a href="#" id="userModifyLink" class="btn btn-default">修改</a>
-				        <a href="#" id="userDeleteLink" class="btn btn-default">删除</a>
-				        <a href="#" id="userViewLink" class="btn btn-default">查看</a>
+				        <a href="#" id="moduleAddLink" class="btn btn-default">增加</a>
+				        <a href="#" id="moduleModifyLink" class="btn btn-default">修改</a>
+				        <a href="#" id="moduleDeleteLink" class="btn btn-default">删除</a>
 				      </div>
 				</div>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<table id="userGrid"></table>
-    			<div id="userGridPager" style="height:50px"></div>
+				<table id="moduleGrid"></table>
+    			<div id="moduleGridPager" style="height:50px"></div>
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -26,7 +25,7 @@
 </div>	      
 
 
-<div class="modal" id="UserInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal" id="ModuleInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

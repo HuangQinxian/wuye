@@ -2,6 +2,7 @@ package com.neusoft.wuye.admin.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,36 @@ public class ModuleServiceImpl implements IModuleService {
 	public List<ModuleModel> getListByAll() throws Exception {
 		
 		return mmp.selectListByAll();
+	}
+
+	@Override
+	public int getCountByAll() {
+		// TODO Auto-generated method stub
+		return mmp.getCountByAll();
+	}
+
+	@Override
+	public int getPageCountByAll(int rows) {
+		int pageCount=0;
+		int count=this.getCountByAll();
+		if(count%rows==0){
+			pageCount=count/rows;
+		}
+		else{
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+
+	@Override
+	public List<ModuleModel> getListByAllWithPage(int rows, int page) {
+		RowBounds rb = new RowBounds(rows*(page - 1), rows);
+		return mmp.getListByAllWithPage(rb);
+	}
+
+	@Override
+	public void add(ModuleModel um) {
+		mmp.add(um);
 	}
 
 }
