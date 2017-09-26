@@ -17,5 +17,6 @@ public interface IModuleService {
 	public void add(ModuleModel um);
 	public void delete(ModuleModel um) throws Exception;
 	public boolean checkCanDelete(String no);
+	public void modify(ModuleModel um);
 	
 }

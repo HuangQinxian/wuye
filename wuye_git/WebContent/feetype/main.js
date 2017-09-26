@@ -4,17 +4,15 @@
 $(function(){
 	var no=null;
 	
-	var href="module/main.html";
-	
 	//显示系统操作员表格
-	$("#moduleGrid").jqGrid({
-		url: 'module/list/page.mvc',
+	$("#feeTypeGrid").jqGrid({
+		url: 'feetype/list/page.mvc',
 		datatype: "json",
 		mtype:"GET",
 		styleUI:'Bootstrap',
 		colModel: [
-			{ label: '模块编号', name: 'no', width: 150 },
-			{ label: '模块名称', name: 'name', width: 200 },	
+			{ label: '收费编号', name: 'no', width: 150 },
+			{ label: '收费类型', name: 'name', width: 200 },	
 		],
 		viewrecords: true, // show the current page, data rang and total records on the toolbar
 		autowidth:true,
@@ -28,7 +26,7 @@ $(function(){
 			records:"count",
 			id:"no"
 		},
-		pager: "#moduleGridPager",
+		pager: "#feeTypeGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
 			no=id;
@@ -40,40 +38,40 @@ $(function(){
 		}
 	});
 	//点击增加处理
-	$("a#moduleAddLink").on("click",function(){
-		$("#modelbody").load("module/add.html",function(){
+	$("a#feeTypeAddLink").on("click",function(){
+		$("#modelbody").load("feetype/add.html",function(){
 			$("#ModalLabel").html("增加系统模块");
 			
 			//验证
-			$("form#moduleAddForm").validate({
+			$("form#feeTypeAddForm").validate({
 				rules:{
 					name:{required:true}
 					
 				},
 				messages:{
 					name:{
-						required:"模块名称不能为空"
+						required:"收费类型不能为空"
 					}
 				}
 				
 			});
 			//拦截用户增加
-			$("form#moduleAddForm").ajaxForm(function(data){
+			$("form#feeTypeAddForm").ajaxForm(function(data){
 				if(data.code=="200"){
-					$("#moduleGrid").trigger("reloadGrid");
+					$("#feeTypeGrid").trigger("reloadGrid");
 					BootstrapDialog.alert({title:"提示",message:data.msg});
 				}else{
-					BootstrapDialog.alert({title:"提示",message:"用户信息添加失败"});
+					BootstrapDialog.alert({title:"提示",message:"收费类型添加失败"});
 				}
 				
-				$('#ModuleInfoModal').modal("hide");
+				$('#feeTypeInfoModal').modal("hide");
 			});
 			//点击取消按钮处理
 			$("button[type='reset']").on("click",function(){
-				$('#ModuleInfoModal').modal("hide");
+				$('#feeTypeInfoModal').modal("hide");
 			});
 		});
-		$('#ModuleInfoModal').modal("show");
+		$('#feeTypeInfoModal').modal("show");
 		
 	});
 	//点击修改处理

@@ -36,7 +36,15 @@ public class ModuleController {
 	@RequestMapping("/delete")
 	public ResultMessage delete(ModuleModel um) throws Exception {
 		ms.delete(um);
-		return new ResultMessage("200", "增加系统模块成功");
+		return new ResultMessage("200", "删除系统模块成功");
+
+	}
+	
+	//修改模块
+	@RequestMapping("/modify")
+	public ResultMessage modify(ModuleModel um) throws Exception {
+		ms.modify(um);
+		return new ResultMessage("200", "修改系统模块成功");
 
 	}
 	

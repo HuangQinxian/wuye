@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.wuye.feeinfo.mapper.IFeeTypeMapper">
+	<resultMap id="FeeTypeResultMap" type="FeeType" >
+		<id property="no" column="TYPENO" />
+		<result property="name" column="TYPENAME"/>
+	</resultMap>
+	
+	<insert id="add" parameterType="FeeType">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SQ_FEETYPE.nextval from dual
+		</selectKey>
+		insert into FEETYPE (TYPENO,TYPENAME) values (#{no},#{name})
+	</insert>
+	
+	<select id="getCountByAll" resultType="_int">
+		select count(*) from FEETYPE
+	</select>
+	
+	<select id="getListByAllWithPage" resultMap="FeeTypeResultMap">
+		select * from FEETYPE
+	</select>
+
+</mapper>
+

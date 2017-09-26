@@ -89,4 +89,9 @@ public class ModuleServiceImpl implements IModuleService {
 		return true;
 	}
 
+	@Override
+	public void modify(ModuleModel um) {
+		mmp.modify(um);
+	}
+
 }

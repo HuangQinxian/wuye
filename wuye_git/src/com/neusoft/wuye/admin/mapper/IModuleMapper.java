@@ -18,5 +18,6 @@ public interface IModuleMapper {
 	public int getCountByAll();
 	public List<ModuleModel> getListByAllWithPage(RowBounds rb);
 	public void add(ModuleModel um);
+	public void modify(ModuleModel um);
 
 }

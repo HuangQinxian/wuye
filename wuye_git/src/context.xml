@@ -63,7 +63,7 @@
 	<!-- 配置Spring管理SqlSessionFactory对象 -->
 	<bean id="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="typeAliasesPackage" value="com.neusoft.wuye.baseinfo.model,com.neusoft.wuye.admin.model"></property>
+		<property name="typeAliasesPackage" value="com.neusoft.wuye.baseinfo.model,com.neusoft.wuye.admin.model,com.neusoft.wuye.feeinfo.model"></property>
 		<property name="mapperLocations" value="classpath:com/neusoft/wuye/*/mapper/xml/*.xml"></property>
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 				

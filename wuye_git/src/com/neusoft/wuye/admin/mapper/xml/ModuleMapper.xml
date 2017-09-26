@@ -16,6 +16,10 @@
 		insert into SystemModule (MNO,MNAME) values (#{no},#{name})
 	</insert>
 	
+	<update id="modify" parameterType="Module">
+		update SystemModule set MNAME= #{name} where mno = #{no}
+	</update>
+	
 	<delete id="delete" parameterType="Module">
 		delete from SystemModule where mno = #{no}
 	</delete>
@@ -23,7 +27,6 @@
 	<select id="select" parameterType="int" resultMap="ModuleResultMap">
 		select * from SystemModule where MNO=#{moduleNo}
 	</select>
-	
 	
 	<select id="selectListByAll" resultMap="ModuleResultMap">
 		select * from SystemModule

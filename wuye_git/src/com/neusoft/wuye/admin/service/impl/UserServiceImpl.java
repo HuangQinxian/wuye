@@ -28,8 +28,6 @@ public class UserServiceImpl implements IUserService {
 		this.fmp = fmp;
 	}
 
-
-
 	@Override
 	public void add(UserModel um) throws Exception {
 		ump.insert(um);
