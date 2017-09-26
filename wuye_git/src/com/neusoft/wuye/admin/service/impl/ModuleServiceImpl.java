@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.neusoft.wuye.admin.mapper.IFunctionMapper;
 import com.neusoft.wuye.admin.mapper.IModuleMapper;
+import com.neusoft.wuye.admin.model.FunctionModel;
 import com.neusoft.wuye.admin.model.ModuleModel;
+import com.neusoft.wuye.admin.service.IFunctionService;
 import com.neusoft.wuye.admin.service.IModuleService;
 //模块功能实现类
 @Service("ModuleService")
@@ -16,10 +19,20 @@ import com.neusoft.wuye.admin.service.IModuleService;
 public class ModuleServiceImpl implements IModuleService {
 
 	private IModuleMapper mmp=null;
+	
+	private IFunctionMapper fm = null;
+	
 	@Autowired
 	public void setMmp(IModuleMapper mmp) {
 		this.mmp = mmp;
 	}
+	
+	@Autowired
+	public void setFm(IFunctionMapper fm) {
+		this.fm = fm;
+	}
+
+
 
 	@Override
 	public ModuleModel get(int moduleNo) throws Exception {
@@ -61,6 +74,19 @@ public class ModuleServiceImpl implements IModuleService {
 	@Override
 	public void add(ModuleModel um) {
 		mmp.add(um);
+	}
+
+	@Override
+	public void delete(ModuleModel um) throws Exception {
+		mmp.delete(um);
+	}
+
+	@Override
+	public boolean checkCanDelete(String no) {
+		List<FunctionModel> list = fm.selectListByMNO(no);
+		if(list != null && list.size() > 0)
+			return false;
+		return true;
 	}
 
 }

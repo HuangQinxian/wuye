@@ -37,5 +37,9 @@ public class FunctionServiceImpl implements IFunctionService {
 		
 		return fmp.selectListByUser(userid);
 	}
+	
+	public List<FunctionModel> getListByMNO(String mno) throws Exception{
+		return fmp.selectListByMNO(mno);
+	}
 
 }

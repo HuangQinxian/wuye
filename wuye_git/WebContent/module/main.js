@@ -2,7 +2,7 @@
  * 系统操作员管理主控制JS
  */
 $(function(){
-	var userid=null;
+	var no=null;
 	
 	//显示系统操作员表格
 	$("#moduleGrid").jqGrid({
@@ -24,12 +24,12 @@ $(function(){
 			page:"page",
 			total:"pageCount",
 			records:"count",
-			id:"userid"
+			id:"no"
 		},
 		pager: "#moduleGridPager",
 		multiselect:false,
 		onSelectRow:function(id){
-			userid=id;
+			no=id;
 		},
 		loadComplete:function(errordata){
 			if(errordata.msg){
@@ -43,50 +43,35 @@ $(function(){
 			$("#ModalLabel").html("增加系统模块");
 			
 			//验证
-			$("form#userAddForm").validate({
+			$("form#moduleAddForm").validate({
 				rules:{
-					userid:{
-						required:true,
-						remote:"user/useridvalidate.mvc"
-					},
-					password:{
-						required:true
-					},
-					name:{required:true},
-					youzhengcode:{
-						required:true,
-						youzhengcode:true
-					},
-					mobile:{
-						required:true,
-						mobile:true
-					}
+					name:{required:true}
 					
 				},
 				messages:{
-					userid:{
-						remote:"此用户账号已经存在"
+					name:{
+						required:"模块名称不能为空"
 					}
 				}
 				
 			});
 			//拦截用户增加
-			$("form#userAddForm").ajaxForm(function(data){
+			$("form#moduleAddForm").ajaxForm(function(data){
 				if(data.code=="200"){
-					$("#userGrid").trigger("reloadGrid");
+					$("#moduleGrid").trigger("reloadGrid");
 					BootstrapDialog.alert({title:"提示",message:data.msg});
 				}else{
 					BootstrapDialog.alert({title:"提示",message:"用户信息添加失败"});
 				}
 				
-				$('#UserInfoModal').modal("hide");
+				$('#ModuleInfoModal').modal("hide");
 			});
 			//点击取消按钮处理
 			$("button[type='reset']").on("click",function(){
-				$('#UserInfoModal').modal("hide");
+				$('#ModuleInfoModal').modal("hide");
 			});
 		});
-		$('#UserInfoModal').modal("show");
+		$('#ModuleInfoModal').modal("show");
 		
 	});
 	//点击修改处理
@@ -151,25 +136,25 @@ $(function(){
 	});
 	
 	//点击删除处理
-	$("a#userDeleteLink").on("click",function(){
-		if(userid==null){
-			BootstrapDialog.alert({title:"提示",message:"请选择要删除的操作员"});
+	$("a#moduleDeleteLink").on("click",function(){
+		if(no==null){
+			BootstrapDialog.alert({title:"提示",message:"请选择要删除的系统模块"});
 		}
 		else{
-			$.getJSON("user/checkcandelete.mvc",{userid:userid},function(data){
-				if(data.result=="200"){
+			$.getJSON("module/checkcandelete.mvc",{no:no},function(data){
+				if(data.code=="200"){
 					
 					BootstrapDialog.confirm({
 						title:"删除确认",
-						message:"您确认要删除此操作员么?",
+						message:"您确认要删除此模块么?",
 						callback:function(result){
 							if(result){
-								$.post("buildingtype/delete.mvc",{userid:userid},function(data){
-									if(data.result=="Y"){
-										userid=null;
-										 $("#userGrid").trigger("reloadGrid");
+								$.post("module/delete.mvc",{no:no},function(data){
+									if(data.code=="200"){
+										no=null;
+										 $("#moduleGrid").trigger("reloadGrid");
 									}
-									BootstrapDialog.alert({title:"提示",message:data.message});
+									BootstrapDialog.alert({title:"提示",message:data.msg});
 									
 								});
 							}
@@ -178,7 +163,7 @@ $(function(){
 					
 				}
 				else{
-					BootstrapDialog.alert({title:"警告",message:data.message});
+					BootstrapDialog.alert({title:"警告",message:data.msg});
 				}
 			});
 		}
@@ -190,7 +175,7 @@ $(function(){
 			BootstrapDialog.alert({title:"提示",message:"请选择要查看的操作员"});
 		}
 		else{
-			$("#ModalLabel").html("查看系统操作员");
+			$("#ModalLabel").html("查看系统模块");
 			$("#modelbody").load("userinfo/view.html",function(){
 				
 				$.getJSON("user/get.mvc",{userid:userid},function(userdata){

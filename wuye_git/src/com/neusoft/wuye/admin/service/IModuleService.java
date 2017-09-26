@@ -15,5 +15,7 @@ public interface IModuleService {
 	public int getPageCountByAll(int rows);
 	public List<ModuleModel> getListByAllWithPage(int rows, int page);
 	public void add(ModuleModel um);
+	public void delete(ModuleModel um) throws Exception;
+	public boolean checkCanDelete(String no);
 	
 }

@@ -10,8 +10,15 @@
 	</resultMap>
 	
 	<insert id="add" parameterType="Module">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select SQ_SYSTEMMODULE.nextval from dual
+		</selectKey>
 		insert into SystemModule (MNO,MNAME) values (#{no},#{name})
 	</insert>
+	
+	<delete id="delete" parameterType="Module">
+		delete from SystemModule where mno = #{no}
+	</delete>
 		
 	<select id="select" parameterType="int" resultMap="ModuleResultMap">
 		select * from SystemModule where MNO=#{moduleNo}

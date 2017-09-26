@@ -33,5 +33,9 @@
 		on a.FUNNO=b.FUNNO where b.USERID=#{userid} 
 	</select>
 
+	<select id="selectListByMNO" parameterType="string" resultMap="FunctionCollectionWithModuleResultMap">
+		select * from SystemFunction where mno=#{no} 
+	</select>
+
 </mapper>
 

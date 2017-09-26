@@ -32,6 +32,14 @@ public class ModuleController {
 
 	}
 	
+	//删除模块
+	@RequestMapping("/delete")
+	public ResultMessage delete(ModuleModel um) throws Exception {
+		ms.delete(um);
+		return new ResultMessage("200", "增加系统模块成功");
+
+	}
+	
 	//取得指定的模块对象
 	@RequestMapping(value="/get",method=RequestMethod.GET)
 	public ModuleModel get(@RequestParam int moduleNo) throws Exception{
@@ -55,9 +63,18 @@ public class ModuleController {
 		result.setRows(rows);
 		result.setList(ms.getListByAllWithPage(rows, page));
 		return result;
-
 	}
 
+	// 检查指定的操作员能否被删除
+		@RequestMapping(value = "/checkcandelete", method = RequestMethod.GET)
+		public ResultMessage checkCanDelete(@RequestParam String no) throws Exception {
+			ResultMessage result = new ResultMessage();
+			if (ms.checkCanDelete(no)) {
+				return new ResultMessage("200", "此模块可以被删除");
+			} else {
+				return new ResultMessage("500", "此模块不能被删除");
+			}
+		}
 	
 	
 }

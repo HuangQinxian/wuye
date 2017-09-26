@@ -14,5 +14,6 @@ public interface IFunctionMapper {
 	public List<FunctionModel> selectListByAll() throws Exception;
 	//取得指定用户的功能列表
 	public List<FunctionModel> selectListByUser(String userid) throws Exception;
+	public List<FunctionModel> selectListByMNO(String mno);
 
 }
