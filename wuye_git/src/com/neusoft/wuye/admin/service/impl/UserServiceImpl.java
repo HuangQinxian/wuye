@@ -36,6 +36,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void modify(UserModel um) throws Exception {
+		System.out.println("进入modify方法");
 		ump.update(um);
 
 	}
@@ -136,7 +137,9 @@ public class UserServiceImpl implements IUserService {
 	}
 	@Override
 	public boolean checkCanDelete(String userid) throws Exception {
-		
+		List<FunctionModel> list = getFunctionsByUser(userid);
+		if(list != null && list.size() > 0)
+			return false;
 		return true;
 	}
 	@Override

@@ -167,19 +167,19 @@ $(function(){
 		}
 		else{
 			$.getJSON("user/checkcandelete.mvc",{userid:userid},function(data){
-				if(data.result=="200"){
+				if(data.code=="200"){
 					
 					BootstrapDialog.confirm({
 						title:"删除确认",
 						message:"您确认要删除此操作员么?",
 						callback:function(result){
 							if(result){
-								$.post("buildingtype/delete.mvc",{userid:userid},function(data){
-									if(data.result=="Y"){
+								$.post("user/delete.mvc",{userid:userid},function(data){
+									if(data.code=="200"){
 										userid=null;
 										 $("#userGrid").trigger("reloadGrid");
 									}
-									BootstrapDialog.alert({title:"提示",message:data.message});
+									BootstrapDialog.alert({title:"提示",message:data.msg});
 									
 								});
 							}
@@ -188,7 +188,7 @@ $(function(){
 					
 				}
 				else{
-					BootstrapDialog.alert({title:"警告",message:data.message});
+					BootstrapDialog.alert({title:"警告",message:data.msg});
 				}
 			});
 		}
